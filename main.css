@@ -1,0 +1,48 @@
+body {
+	margin: 0;
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+}
+
+h1 {
+	text-align: center;
+	padding-top: 35vh;
+}
+
+.volume {
+	height: 10px;
+	width: 200px;
+	background-color: black;
+}
+
+.slider {
+	height: 10px;
+}
+
+.slider-container {
+	display: flex;
+	justify-content: space-between;
+	width: 500px;
+	height: 0px;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	/* animation-name: spin;
+	animation-duration: 20s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear; */
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg);}
+	100% { transform: rotate(359deg); }
+}
+
+.slider {
+	transform: rotate(270deg);
+}
