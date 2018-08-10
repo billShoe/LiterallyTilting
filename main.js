@@ -27,10 +27,10 @@ var FEATURE_DRIFT_TWIST = false;
 var FEATURE_DRIFT_STOP = false;
 
 window.onload = function () {
-	volumeBar     = document.getElementById('volumeBar');
-	sliderLeft    = document.getElementById('sliderLeft');
-	sliderRight   = document.getElementById('sliderRight');
-	volumeDisplay = document.getElementById('volumeDisplay');
+	volumeBar     = document.getElementById("volumeBar");
+	sliderLeft    = document.getElementById("sliderLeft");
+	sliderRight   = document.getElementById("sliderRight");
+	volumeDisplay = document.getElementById("volumeDisplay");
 
 	setupToggles();
 	prepareFuckery();
@@ -64,7 +64,9 @@ function setupToggles() {
 }
 
 function setVolume() {
-	rotation = ((sliderLeft.value / sliderLeft.max) - (sliderRight.value / sliderRight.max)) * maxBarRotation;
+	rotation = ((sliderLeft.value / sliderLeft.max)
+			 - (sliderRight.value / sliderRight.max))
+			 * maxBarRotation;
 	rotation = clamp(rotation, -maxBarRotation, maxBarRotation);
 	volumeBar.style.transform = `rotate(${rotation}deg)`;
 
@@ -107,8 +109,8 @@ function setBehavior() {
 }
 
 function prepareFuckery() {
-	setBehavior();
 
+	setBehavior();
 	setInterval(function () {
 		setBehavior();
 	}, milliseconds * 10);
@@ -126,11 +128,8 @@ function doFuckery() {
 }
 
 function clamp(number, from, to) {
-	if (number < from) {
-		number = from;
-	} else if (number > to) {
-		number = to;
-	}
+	if (number < from) number = from;
+	else if (number > to) number = to;
 	return number;
 }
 
@@ -148,7 +147,7 @@ function doGravity() {
 		let _value = parseInt(volumeBar.value);
 		let center = (parseInt(volumeBar.max) + parseInt(volumeBar.min)) / 2;
 
-		let weight = Math.round(gravityTick * ((_value - center)) / (_max - _min));
+		let weight = Math.round(gravityTick * (_value - center) / (_max - _min));
 
 		sliderLeft.value  = parseInt(sliderLeft.value)  + weight;
 		sliderRight.value = parseInt(sliderRight.value) - weight;
