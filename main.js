@@ -20,11 +20,11 @@ var gravityTick       = 10 * tickSize * gravityFuckFactor;
 
 var gravityFlag     = 0;
 
-var DEBUG = false;
-var FEATURE_GRAVITY = false;
-var FEATURE_DRIFT = true;
+var DEBUG               = false;
+var FEATURE_GRAVITY     = false;
+var FEATURE_DRIFT       = true;
 var FEATURE_DRIFT_TWIST = false;
-var FEATURE_DRIFT_STOP = false;
+var FEATURE_DRIFT_STOP  = false;
 
 window.onload = function () {
 	volumeBar     = document.getElementById("volumeBar");
@@ -37,10 +37,11 @@ window.onload = function () {
 }
 
 function setupToggles() {
-	toggleDrift   = document.getElementById("toggleDrift");
-	toggleTwist   = document.getElementById("toggleTwist");
-	toggleStop    = document.getElementById("toggleStop");
-	toggleGravity = document.getElementById("toggleGravity");
+	let toggleDrift        = document.getElementById("toggleDrift");
+	let toggleTwist        = document.getElementById("toggleTwist");
+	let toggleStop         = document.getElementById("toggleStop");
+	let toggleGravity      = document.getElementById("toggleGravity");
+	let _gravityFuckFactor = document.getElementById("gravityFuckFactor");
 
 	toggleDrift.onclick = function() {
 		FEATURE_DRIFT = this.checked;
@@ -61,16 +62,27 @@ function setupToggles() {
 		FEATURE_GRAVITY = this.checked;
 		console.log("Gravity toggled");
 	};
+
+	_gravityFuckFactor.oninput = function() {
+		gravityFuckFactor = this.value;
+	};
+
+	_gravityFuckFactor.onchange = function() {
+		if (DEBUG) {
+			console.log(`gravityFuckFactor: ${gravityFuckFactor}`);
+		}
+
+	}
 }
 
 function setVolume() {
 	rotation = ((sliderLeft.value / sliderLeft.max)
-			 - (sliderRight.value / sliderRight.max))
-			 * maxBarRotation;
+			- (sliderRight.value / sliderRight.max))
+			* maxBarRotation;
 	rotation = clamp(rotation, -maxBarRotation, maxBarRotation);
-	volumeBar.style.transform = `rotate(${rotation}deg)`;
 
-	volumeBar.value = (parseInt(volumeBar.value)) + Math.round(rotation);
+	volumeBar.style.transform = `rotate(${rotation}deg)`;
+    volumeBar.value = (parseInt(volumeBar.value)) + Math.round(rotation);
 
 	volumeDisplay.innerText = Math.round(volumeBar.value / maxVolumeScale);
 }

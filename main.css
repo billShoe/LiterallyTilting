@@ -40,10 +40,11 @@ h1 {
 
 #toggle-container {
 	display: flex;
+	justify-content: center;
 	width: 500px;
-	position: absolute;
+	position: fixed;
 	margin: auto;
-	bottom: 0;
+	bottom: 5vh;
 	left: 0;
 	right: 0;
 }
