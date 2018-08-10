@@ -41,7 +41,7 @@ h1 {
 #toggle-container {
 	display: flex;
 	justify-content: center;
-	width: 500px;
+	width: auto;
 	position: fixed;
 	margin: auto;
 	bottom: 5vh;

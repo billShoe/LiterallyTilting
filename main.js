@@ -20,11 +20,12 @@ var gravityTick       = 10 * tickSize * gravityFuckFactor;
 
 var gravityFlag     = 0;
 
-var DEBUG               = false;
-var FEATURE_GRAVITY     = false;
-var FEATURE_DRIFT       = true;
-var FEATURE_DRIFT_TWIST = false;
-var FEATURE_DRIFT_STOP  = false;
+var DEBUG                      = false;
+var FEATURE_GRAVITY            = false;
+var FEATURE_DRIFT              = true;
+var FEATURE_DRIFT_TWIST        = false;
+var FEATURE_DRIFT_STOP         = false;
+var FEATURE_DRIFT_ACCELERATION = false;
 
 window.onload = function () {
 	volumeBar     = document.getElementById("volumeBar");
@@ -40,6 +41,7 @@ function setupToggles() {
 	let toggleDrift        = document.getElementById("toggleDrift");
 	let toggleTwist        = document.getElementById("toggleTwist");
 	let toggleStop         = document.getElementById("toggleStop");
+	let toggleAcceleration = document.getElementById("toggleAcceleration");
 	let toggleGravity      = document.getElementById("toggleGravity");
 	let _gravityFuckFactor = document.getElementById("gravityFuckFactor");
 
@@ -55,6 +57,11 @@ function setupToggles() {
 
 	toggleStop.onclick = function() {
 		FEATURE_DRIFT_STOP = this.checked;
+		console.log("Drift/Stop toggled");
+	};
+
+	toggleAcceleration.onclick = function() {
+		FEATURE_DRIFT_ACCELERATION = this.checked;
 		console.log("Drift/Stop toggled");
 	};
 
@@ -82,7 +89,7 @@ function setVolume() {
 	rotation = clamp(rotation, -maxBarRotation, maxBarRotation);
 
 	volumeBar.style.transform = `rotate(${rotation}deg)`;
-    volumeBar.value = (parseInt(volumeBar.value)) + Math.round(rotation);
+	volumeBar.value = (parseInt(volumeBar.value)) + Math.round(rotation);
 
 	volumeDisplay.innerText = Math.round(volumeBar.value / maxVolumeScale);
 }
@@ -92,6 +99,16 @@ dirs = {
 	"0": "nowhere",
 	"1": "up"
 };
+
+function dirs(speed) {
+	if (speed > 0) {
+		return "up";
+	} else if (speed < 0) {
+		return "down";
+	} else {
+	return "nowhere";
+	}
+}
 function getDriftDirection() {
 	if (!FEATURE_DRIFT_STOP) {
 		// [-1, 1]
@@ -104,18 +121,29 @@ function getDriftDirection() {
 
 function setBehavior() {
 	if (FEATURE_DRIFT_TWIST) {
-		rightDirection = getDriftDirection();
-		leftDirection  = getDriftDirection();
+		if (FEATURE_DRIFT_ACCELERATION) {
+			rightDirection += getDriftDirection();
+			leftDirection  += getDriftDirection();
+		} else {
+			rightDirection = getDriftDirection();
+			leftDirection  = getDriftDirection();
+		}
 
 		if (DEBUG) {
-		console.log(`setBehavior: Left drifting ${dirs[leftDirection]}, ` +
-				`Right drifting ${dirs[rightDirection]}`);
+			console.log(`setBehavior: Left drifting ${dirs(leftDirection)}, ` +
+				`Right drifting ${dirs(rightDirection)}`);
 		}
 	} else {
-		leftDirection = rightDirection = getDriftDirection();
+		if (FEATURE_DRIFT_ACCELERATION) {
+			let delta = getDriftDirection();
+			leftDirection  += delta;
+			rightDirection += delta;
+		} else {
+			leftDirection = rightDirection = getDriftDirection();
+		}
 
 		if (DEBUG) {
-			console.log(`setBehavior: Drifting ${dirs[leftDirection]}`);
+			console.log(`setBehavior: Drifting ${dirs(leftDirection)}`);
 		}
 	}
 }
