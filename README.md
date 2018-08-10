@@ -26,6 +26,11 @@ The balance sliders will drift, but only sometimes. Requires `FEATURE_DRIFT`.
 The balance sliders will occasionally disagree and head in opposite directions.
 Requires `FEATURE_DRIFT`.
 
+`FEATURE_DRIFT_ACCELERATION` (`false` by default)
+
+The balance sliders' speeds will change, fluctuating to the whims of
+`Math.random()`.
+
 ### Gravity
 
 `FEATURE_GRAVITY` (`false` by default)
