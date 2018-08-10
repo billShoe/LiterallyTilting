@@ -7,6 +7,9 @@ to an extreme: you don't even get to keep your selection!
 Features
 ========
 
+Enable or disable features by opening your browser's Javascript console and
+setting the following variables.
+
 ### Drift
 
 `FEATURE_DRIFT` (`true` by default)
