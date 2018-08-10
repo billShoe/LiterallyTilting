@@ -38,6 +38,17 @@ h1 {
 	animation-timing-function: linear; */
 }
 
+#toggle-container {
+	display: flex;
+	justify-content: center;
+	width: auto;
+	position: fixed;
+	margin: auto;
+	bottom: 5vh;
+	left: 0;
+	right: 0;
+}
+
 @keyframes spin {
 	0% { transform: rotate(0deg);}
 	100% { transform: rotate(359deg); }

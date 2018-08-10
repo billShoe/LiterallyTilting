@@ -15,5 +15,19 @@
 		<input type="range" min="1" max="10000" value="5000" class="volume" id="volumeBar" disabled="true">
 		<input type="range" min="1" max="18000" value="9000" class="slider" id="sliderRight">
 	</div>
+	<div id="toggle-container">
+		<input type="checkbox" id="toggleDrift" checked>
+			<label for="toggleDrift">Drift</label>
+		<input type="checkbox" id="toggleStop">
+			<label for="toggleStop">Drift/Stop</label>
+		<input type="checkbox" id="toggleTwist">
+			<label for="toggleTwist">Drift/Twist</label>
+		<input type="checkbox" id="toggleAcceleration">
+			<label for="acceleration">Acceleration</label>
+		<input type="checkbox" id="toggleGravity">
+			<label for="toggleGravity">Gravity</label>
+		<input type="range" id="gravityFuckFactor" min="0" max="10" value="0.5" step="0.1">
+			<label for="gravityFuckFactor">Gravity Strength</label>
+	</div>
 </body>
 </html>
