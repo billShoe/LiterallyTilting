@@ -8,7 +8,8 @@ Features
 ========
 
 Enable or disable features by opening your browser's Javascript console and
-setting the following variables.
+setting the following variables, or by using the checkboxes at the bottom of hte
+page.
 
 ### Drift
 

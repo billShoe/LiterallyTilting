@@ -27,12 +27,40 @@ var FEATURE_DRIFT_TWIST = false;
 var FEATURE_DRIFT_STOP = false;
 
 window.onload = function () {
-	volumeBar = document.getElementById('volumeBar');
-	sliderLeft = document.getElementById('sliderLeft');
-	sliderRight = document.getElementById('sliderRight');
+	volumeBar     = document.getElementById('volumeBar');
+	sliderLeft    = document.getElementById('sliderLeft');
+	sliderRight   = document.getElementById('sliderRight');
 	volumeDisplay = document.getElementById('volumeDisplay');
 
+	setupToggles();
 	prepareFuckery();
+}
+
+function setupToggles() {
+	toggleDrift   = document.getElementById("toggleDrift");
+	toggleTwist   = document.getElementById("toggleTwist");
+	toggleStop    = document.getElementById("toggleStop");
+	toggleGravity = document.getElementById("toggleGravity");
+
+	toggleDrift.onclick = function() {
+		FEATURE_DRIFT = this.checked;
+		console.log("Drift toggled");
+	};
+
+	toggleTwist.onclick = function() {
+		FEATURE_DRIFT_TWIST = this.checked;
+		console.log("Drift/Twist toggled");
+	};
+
+	toggleStop.onclick = function() {
+		FEATURE_DRIFT_STOP = this.checked;
+		console.log("Drift/Stop toggled");
+	};
+
+	toggleGravity.onclick = function() {
+		FEATURE_GRAVITY = this.checked;
+		console.log("Gravity toggled");
+	};
 }
 
 function setVolume() {
